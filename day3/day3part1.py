@@ -31,9 +31,8 @@ def check_if_part_number(line_array, y_coord, x_coord_start, num_length):
     is_part_number = False
     for y in range(y_coord - 1, y_coord + 2):
         for x in range(x_coord_start - 1, x_coord_start + num_length + 1):
-            if (y > -1 and y < len(line_array)) and (x > -1 and x < len(line_array[y])):
-                if check_if_symbol(line_array[y][x]):
-                    return True
+            if 0 <= y < len(line_array) and 0 <= x < len(line_array[y]) and check_if_symbol(line_array[y][x]):
+                return True
     return is_part_number
 
 
