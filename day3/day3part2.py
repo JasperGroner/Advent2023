@@ -9,10 +9,7 @@ def make_line_array(input_file_name):
 
     file_reader = open(input_file_name, 'r')
     raw_input = file_reader.read()
-    raw_input_lines = raw_input.splitlines()
-
-    for line in raw_input_lines:
-        line_array.append(line)
+    line_array = raw_input.splitlines()
     
     file_reader.close()
     return line_array
