@@ -27,25 +27,31 @@ def range_conversion(unconverted_ranges, conversion_range):
         handle a single range conversion for all unconverted ranges
     """
     converted_ranges, new_unconverted_ranges = [], []
+    # Loop through each set of inputs to convert
     for input_range in unconverted_ranges:
         if conversion_range.minimum <= input_range.minimum <= conversion_range.maximum:
             if conversion_range.maximum >= input_range.maximum:
+                # Input range entirely within conversion range
                 new_range = ItemRange(minimum=input_range.minimum + conversion_range.modifier, maximum=input_range.maximum + conversion_range.modifier)
                 converted_ranges.append(new_range)
             else:
+                # Input range starts within conversion range and ends after
                 new_range = ItemRange(minimum=input_range.minimum + conversion_range.modifier, maximum=conversion_range.maximum + conversion_range.modifier)
                 converted_ranges.append(new_range)
                 new_unconverted_ranges.append(ItemRange(minimum=conversion_range.maximum + 1, maximum=input_range.maximum))
         elif conversion_range.minimum <= input_range.maximum <= conversion_range.maximum:
+            # Input range starts before conversion range and ends wihtin conversion range
             new_range = ItemRange(minimum=conversion_range.minimum + conversion_range.modifier, maximum=input_range.maximum + conversion_range.modifier)
             converted_ranges.append(new_range)
             new_unconverted_ranges.append(ItemRange(minimum=input_range.minimum, maximum=conversion_range.minimum - 1))
         elif input_range.minimum <= conversion_range.minimum and input_range.maximum >= conversion_range.maximum:
+            # Input range includes conversion range but extends beyond it on both sides
             new_range = ItemRange(minimum=conversion_range.minimum + conversion_range.modifier, maximum=conversion_range.maximum + conversion_range.modifier)
             converted_ranges.append(new_range)
             new_unconverted_ranges.append(ItemRange(minimum=input_range.minimum, maximum=conversion_range.minimum - 1))
             new_unconverted_ranges.append(ItemRange(minimum=conversion_range.maximum + 1, maximum=input_range.maximum))
         else:
+            # No overlap
             new_unconverted_ranges.append(input_range)
 
     return converted_ranges, new_unconverted_ranges
