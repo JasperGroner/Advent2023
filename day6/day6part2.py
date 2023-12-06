@@ -9,7 +9,7 @@ def get_race_info(input_file_name):
     """
     file_reader = open(input_file_name, 'r')
     raw_input = file_reader.read()
-    [duration_line, record_length_line] = raw_input.splitlines()
+    duration_line, record_length_line = raw_input.splitlines()
     duration = "".join(re.findall(r"\d+", duration_line))
     record_length = "".join(re.findall(r"\d+", record_length_line))
 

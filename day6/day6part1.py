@@ -15,8 +15,7 @@ def make_line_array(input_file_name):
         Take an input file and return
         array of the lines in the file.
     """
-    line_array = []
-
+    
     file_reader = open(input_file_name, 'r')
     raw_input = file_reader.read()
     line_array = raw_input.splitlines()
@@ -60,7 +59,7 @@ def get_ways_to_win(race):
         if is_way_to_win(race, hold_time):
             last_winning_duration = hold_time
             break
-        
+
     # plus one because inclusive
     return last_winning_duration - first_winning_duration + 1
 
