@@ -83,12 +83,10 @@ def process_hand(string):
     """
 
     hand, bid = string.split(" ")
-    print("hand: " + hand)
     bid = int(bid)
     hand_string = get_hand_category(hand)
     for char in hand:
         hand_string += CARD_VALUES[char]
-    print(hand_string)
     return ProcessedHand(hand_string, bid)
 
 
