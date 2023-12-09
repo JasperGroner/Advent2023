@@ -21,7 +21,7 @@ def get_next_item(line):
         next_line = [line[idx + 1] - item
                     for idx, item in enumerate(line)
                     if idx < len(line) - 1]
-        return line[len(line) - 1] + get_next_item(next_line)
+        return line[-1] + get_next_item(next_line)
     return 0
 
 
