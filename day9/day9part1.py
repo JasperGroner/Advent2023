@@ -17,7 +17,7 @@ def get_next_item(line):
     """
         Recurse to get next item in list
     """
-    if sum(line) !=  0:
+    if any(line):
         next_line = [line[idx + 1] - item
                     for idx, item in enumerate(line)
                     if idx < len(line) - 1]
