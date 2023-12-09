@@ -4,7 +4,7 @@ from day9part1 import make_line_array
 
 def get_prev_item(line):
     """
-        Recurse to get next item in list
+        Recurse to get prevs item in list
     """
     if sum(line) !=  0:
         next_line = [line[idx + 1] - item
