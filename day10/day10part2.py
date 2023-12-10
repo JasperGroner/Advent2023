@@ -27,7 +27,8 @@ def get_clean_line_array(line_array, pipes, start_y, start_x):
     
     clean_line_array[start_y][start_x] = get_start_char(pipes)
 
-    while (pipes[0].location["x"] != pipes[1].location["x"] or pipes[0].location["y"] != pipes[1].location["y"]):
+    while (pipes[0].location["x"] != pipes[1].location["x"] or \
+        pipes[0].location["y"] != pipes[1].location["y"]):
         for idx, pipe in enumerate(pipes):
             clean_line_array[pipe.location["y"]][pipe.location["x"]] = pipe.char
             prev_x, prev_y = pipe.location["x"], pipe.location["y"]
