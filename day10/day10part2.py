@@ -50,12 +50,8 @@ def is_interior(y, x, clean_line_array):
         char = clean_line_array[y_loc][x]
         if char in ["-", "L", "F"]:
             right += 1
-        if char in ["-", "J", "7"]:
-            left += 1
-    
-    num_crossings = min([left, right])
 
-    return num_crossings % 2 == 1
+    return right % 2 == 1
 
 
 def get_number_of_interior_spaces(clean_line_array):
