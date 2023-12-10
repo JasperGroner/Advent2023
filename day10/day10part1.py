@@ -70,11 +70,13 @@ def get_first_steps(line_array, start_y, start_x):
     first_steps = []
     adjoining_locations = ((1, 0), (-1, 0), (0, 1), (0, -1))
     for location in adjoining_locations:
-        adjoining_pipe = Pipe(start_x + location[1], start_y + location[0], line_array[start_y + location[0]][start_x + location[1]])
+        adjoining_pipe = Pipe(start_x + location[1], start_y + location[0],
+            line_array[start_y + location[0]][start_x + location[1]])
         pipe_adj_loc = adjoining_pipe.get_adjoining_pipes()
         if line_array[start_y + location[0]][start_x + location[1]] != '.' and \
                 start_location in pipe_adj_loc:
-            first_steps.append(Pipe(start_x + location[1], start_y + location[0], line_array[start_y + location[0]][start_x + location[1]]))
+            first_steps.append(Pipe(start_x + location[1], start_y + location[0],
+                line_array[start_y + location[0]][start_x + location[1]]))
 
     for pipe in first_steps:
         pipe.set_prev_pipe(start_x, start_y)
@@ -84,7 +86,8 @@ def get_first_steps(line_array, start_y, start_x):
 def get_answer(line_array, pipes):
     # start with one step, since we're one from start
     answer = 1
-    while (pipes[0].location["x"] != pipes[1].location["x"] or pipes[0].location["y"] != pipes[1].location["y"]):
+    while (pipes[0].location["x"] != pipes[1].location["x"] or \
+            pipes[0].location["y"] != pipes[1].location["y"]):
         for idx, pipe in enumerate(pipes):
             prev_x, prev_y = pipe.location["x"], pipe.location["y"]
             pipes[idx] = Pipe(x = pipe.next_pipe["x"], y = pipe.next_pipe["y"],
