@@ -25,28 +25,26 @@ class Pipe:
         self.prev_pipe = {"x": prev_x, "y": prev_y}
 
     def get_next_pipe(self):
-        pipe1, pipe2 = Pipe.get_adjoining_pipes(self.char, self.location["x"], self.location["y"])
+        pipe1, pipe2 = self.get_adjoining_pipes()
         self.next_pipe = pipe1 if pipe2 == self.prev_pipe else pipe2
     
-    @staticmethod
-    def get_adjoining_pipes(char: str, x: int, y: int):
-        if (char == "." or char == "S"):
-            print(char)
+    def get_adjoining_pipes(self):
+        if (self.char == "." or self.char == "S"):
+            print(self.char)
             return None
-        exits = EXITS[char]
-        [pipe1, pipe2] = [Pipe.translate_map_char(exit, x, y) for exit in exits]
+        exits = EXITS[self.char]
+        [pipe1, pipe2] = [self.translate_map_char(exit_loc) for exit_loc in exits]
         return pipe1, pipe2
 
-    @staticmethod
-    def translate_map_char(char:str, x: int, y: int):
+    def translate_map_char(self, char:str):
         if char.endswith("x"):
             if char.startswith("+"):
-                return {"x": x + 1, "y": y}
-            return {"x": x - 1, "y": y}
+                return {"x": self.location["x"] + 1, "y": self.location["y"]}
+            return {"x": self.location["x"] - 1, "y": self.location["y"]}
         else:
             if char.startswith("+"):
-                return {"x": x, "y": y + 1}
-            return {"x": x, "y": y - 1}
+                return {"x": self.location["x"], "y": self.location["y"] + 1}
+            return {"x": self.location["x"], "y": self.location["y"] - 1}
 
         
 def make_line_array(input_file_name: str):
@@ -72,9 +70,10 @@ def get_first_steps(line_array, start_y, start_x):
     first_steps = []
     adjoining_locations = ((1, 0), (-1, 0), (0, 1), (0, -1))
     for location in adjoining_locations:
-        adjoining_locations = Pipe.get_adjoining_pipes(line_array[start_y + location[0]][start_x + location[1]], start_x + location[1], start_y + location[0])
+        adjoining_pipe = Pipe(start_x + location[1], start_y + location[0], line_array[start_y + location[0]][start_x + location[1]])
+        pipe_adj_loc = adjoining_pipe.get_adjoining_pipes()
         if line_array[start_y + location[0]][start_x + location[1]] != '.' and \
-                start_location in adjoining_locations:
+                start_location in pipe_adj_loc:
             first_steps.append(Pipe(start_x + location[1], start_y + location[0], line_array[start_y + location[0]][start_x + location[1]]))
 
     for pipe in first_steps:
