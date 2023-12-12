@@ -90,7 +90,7 @@ def main(argv):
         adds = get_perms(line, 0)
         answer += adds
     
-    print(len(stored_permutations.keys()))
+    print("stored permutations: ", len(stored_permutations.keys()))
 
     print("answer: " + str(answer))
     return answer
