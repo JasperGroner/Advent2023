@@ -51,6 +51,7 @@ def get_perms(line, depth):
             if map_row[loc + i] not in ("?", "#"):
                 # print("out of space")
                 valid_loc = False
+                break
 
         if loc + current_size < len(map_row) and map_row[loc + current_size] == "#":
             # The next space is required and would be blank
@@ -87,9 +88,10 @@ def main(argv):
 
     for line in processed_input:
         adds = get_perms(line, 0)
-        print(adds)
         answer += adds
     
+    print(len(stored_permutations.keys()))
+
     print("answer: " + str(answer))
     return answer
 
