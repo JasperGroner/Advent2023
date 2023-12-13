@@ -18,7 +18,7 @@ def make_line_array(input_file_name: str) -> list[str]:
 
         return line_array
 
-def get_rotated(pattern):
+def get_rotated(pattern: list[str]) -> list[str]:
     """
         Rotate pattern on vertical axis
     """
@@ -54,11 +54,11 @@ def process_input(raw_input: list[str]) -> list[MirrorPattern]:
         
     return processed_patterns
 
-def get_flip_point(pattern):
+def get_flip_point(pattern: list[str]) -> int:
     """
         returns the flip point of a pattern
     """
-    for idx, line in enumerate(pattern):
+    for idx, _ in enumerate(pattern):
         if idx == len(pattern) - 1:
             continue
         offset = 0
@@ -72,14 +72,14 @@ def get_flip_point(pattern):
             return idx + 1
     return 0
 
-def get_value(mirror_pattern: MirrorPattern):
+def get_value(mirror_pattern: MirrorPattern) -> int:
     """
         Returns the value of a mirror pattern
     """
     return horizontal_result if (horizontal_result := get_flip_point(mirror_pattern.horizontal)) else get_flip_point(mirror_pattern.vertical) * 100
 
 
-def main(argv):
+def main(argv: list[str]) -> int:
     """
         it's main it does the main stuffd
     """
